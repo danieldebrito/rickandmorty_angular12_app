@@ -1,0 +1,67 @@
+<div class="container">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+
+        <!--  PERSONAJES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <li [ngbNavItem]="1">
+            <a ngbNavLink>Personaje</a>
+            <ng-template ngbNavContent>
+                <div class="p-2">
+                    <p class="fs-3">Búsqueda por Personajes:</p>
+                </div>
+                <div class="p-3">
+                    <app-characters-bar (txtBuscar)="buscarPorTexto($event)"></app-characters-bar>
+                    <app-characters-grid [verBotonComparar]="false" (lanzaPaginatorPage)="parinatorPage($event)"
+                        [filterCharacters]="filterCharacters" [episodes]="episodes"
+                        [infoApiCharacters]="infoApiCharacters">
+                    </app-characters-grid>
+                </div>
+            </ng-template>
+        </li>
+
+        <!--  UBICACIONES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <li [ngbNavItem]="2">
+            <a ngbNavLink>Ubicación</a>
+            <ng-template ngbNavContent>
+                <div class="p-2">
+                    <p class="fs-3">Búsqueda por Ubicación:</p>
+                </div>
+                <div class="p-3">
+                    <app-locations-bar (limpiarBusqueda)="getCLocations()" (txtBuscarLocation)="buscarLocation($event)"
+                        [locations]="locations"></app-locations-bar>
+                </div>
+                <app-locations-grid [filterLocations]="filterLocations" [episodes]="episodes" [infoApiLocations]="infoApiLocations"
+                    (lanzaPaginatorPage)="parinatorPageLocations($event)"></app-locations-grid>
+            </ng-template>
+        </li>
+
+        <!--  EPISODIOS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+        <li [ngbNavItem]="3">
+            <a ngbNavLink>Episodios</a>
+            <ng-template ngbNavContent>
+
+                <div *ngIf="!mostrarDetalleEpisodio">
+                    <div class="p-2">
+                        <p class="fs-3">Búsqueda por Episodios:</p>
+                    </div>
+                    <div class="p-3">
+                        <app-episodes-bar [cantEpisodes]="infoApiEpisodes.count"
+                            (codigoEpisodioSeleccionado)="getEpisodioPorID($event)" (allEpisodios)="getsEpisodes()">
+                        </app-episodes-bar>
+                    </div>
+                    <app-episodes-grid [filterEpisodes]="filterEpisodes" (verEpisodioDetalle)="detalleEpisodio($event)">
+                    </app-episodes-grid>
+                </div>
+
+                <div *ngIf="mostrarDetalleEpisodio">
+
+                    <div class="p-2"><button type="button" class="btn btn-success btn-sm"
+                            (click)="getsEpisodes()">Volver</button></div>
+
+                    <app-episode-detalle [episodio]="episodioDetalle"></app-episode-detalle>
+                </div>
+
+            </ng-template>
+        </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

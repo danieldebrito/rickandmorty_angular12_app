@@ -1,0 +1,33 @@
+<div class="container">
+    <form [formGroup]="searchForm" class="row gx-3 gy-2 align-items-center" (submit)="lanzarTextoBuscar()">
+
+
+        <div class="col-sm-6">
+            <label class="visually-hidden" for="specificSizeInputName">Name</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Rick Sanchez">
+        </div>
+
+        <!--
+                <div *ngIf="searchForm.get('nombre').invalid && showErrors" class="alert alert-danger mt-2">
+                <div *ngIf="searchForm.get('nombre').errors?.['required']">
+                    Este campo es requerido.
+                </div>
+                <div *ngIf="searchForm.get('nombre').errors?.['maxlength']">
+                    No mas de 40 caracteres.
+                </div>
+                <div *ngIf="searchForm.get('nombre').errors?.['minlength']">
+                    Por lo menos 2 caracteres.
+                </div>
+                <div *ngIf="searchForm.get('nombre').errors?.['pattern']">
+                    Ingrece solo letras.
+                </div>
+            </div>
+        -->
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-primary" (click)="limpiar()" >Limpiar Busqueda</a>
+        </div>
+    </form>
+</div>

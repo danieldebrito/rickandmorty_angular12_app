@@ -1,0 +1,26 @@
+<div class="container">
+    <form [formGroup]="searchForm" class="row gx-3 gy-2 align-items-center" (submit)="limpiar()">
+
+        <div class="col-sm-3">
+            
+            <label class="visually-hidden" for="specificSizeSelect">Preference</label>
+            <select class="form-select" id="specificSizeSelect" (change)="criterioBusqueda($event)">
+                <option value="" disabled selected hidden>Filtrar</option>
+                <option selected value="name" >Buscar por Nombre</option>
+                <option selected value="type">Buscar por Tipo</option>
+                <option selected value="dimension">Buscar por Dimension</option>
+            </select>
+    
+        </div>
+        <div class="col-sm-3">
+            <label class="visually-hidden" for="specificSizeInputName"></label>
+            <input type="text" class="form-control" formControlName="palabraClave" placeholder="">
+        </div>
+        <div class="col-auto">
+            <a type="button" class="btn btn-primary"(click)="buscar()">Buscar</a>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Limpiar</button>
+        </div>
+    </form>
+</div>

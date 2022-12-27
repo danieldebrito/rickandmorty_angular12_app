@@ -1,0 +1,110 @@
+<div class="container" *ngIf="!verComparativa">
+  <div class="p-2">
+    <p class="fs-3">Comparar Personajes </p>
+  </div>
+  <div class="row">
+    <div class="col-sm-9">
+      <app-characters-bar (txtBuscar)="buscarPorTexto($event)"></app-characters-bar>
+      <app-characters-grid [disableButton]="disableButton" [verBotonComparar]="true"
+        (lanzaPaginatorPage)="parinatorPage($event)" [filterCharacters]="filterCharacters"
+        [infoApiCharacters]="infoApiCharacters" (lanzaAddComparativa)="addComparativa($event)"></app-characters-grid>
+    </div>
+
+
+    <div class="col-sm-3">
+      <p class="fs-5">Personajes a Comparar : </p>
+      <div class="container-fluid">
+
+        <table class="table table-hover">
+          <tbody>
+            <tr *ngFor="let item of characterComparados">
+              <td>
+                <div *ngIf="item.url">
+                  <app-character-item [characterURL]="item.url"></app-character-item>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="mostrarButonComparativa">
+          <button type="button" class="btn btn-success btn-sm" (click)="mostrarComparativa()">Mostrar
+            Comparativa</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container" *ngIf="verComparativa">
+
+  <div class="p-2">
+    <p class="fs-3">Tabla Comparativa : </p>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-sm-3">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+          </tr>
+          <tr>
+            <th scope="row">Genero</th>
+          </tr>
+          <tr>
+            <th scope="row">Ubicación</th>
+          </tr>
+          <tr>
+            <th scope="row">Especie</th>
+          </tr>
+          <tr>
+            <th scope="row">Estado</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div class="col-sm-3" *ngFor="let item of characterComparados">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <td scope="col">{{ item.name }}</td>
+          </tr>
+          <tr>
+            <td>{{ item.gender }}</td>
+          </tr>
+          <tr>
+            <td>{{ item.location?.name }}</td>
+          </tr>
+          <tr>
+            <td>{{ item.species }}</td>
+          </tr>
+          <tr>
+            <td>{{ item.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>Cant. de Episodios Compartidos:</h3>
+
+  <div *ngIf="characterComparados.length >= 2">
+    <p>{{ this.episodiosCopartidos(this.characterComparados[0], this.characterComparados[1]) }}</p>
+  </div>
+  <div *ngIf="characterComparados.length == 3">
+    <p>{{ this.episodiosCopartidos(this.characterComparados[0], this.characterComparados[2]) }}</p>
+    <p>{{ this.episodiosCopartidos(this.characterComparados[1], this.characterComparados[2]) }}</p>
+  </div>
+
+  <button type="button" class="btn btn-success btn-sm" (click)="volverListado()">Volver a Listado</button>
+
+
+</div>

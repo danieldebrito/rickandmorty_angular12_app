@@ -1,0 +1,14 @@
+<form class="row gx-3 gy-2 align-items-center">
+
+    <div class="col-sm-3">
+        <label class="visually-hidden" for="specificSizeSelect">Preference</label>
+        <select class="form-select" id="specificSizeSelect" (change)="lanzarEpisodio($event)">
+            <option value="" disabled selected hidden>Filtrar Capitulo</option>
+            <option selected *ngFor="let item of idsEpisodios" value = "{{item}}"> Episodio:  {{ item }} </option>
+        </select>
+
+    </div>
+    <div class="col-auto">
+        <a class="btn btn-primary" (click)="limpiarEpisodios()" >Limpiar</a>
+    </div>
+</form>

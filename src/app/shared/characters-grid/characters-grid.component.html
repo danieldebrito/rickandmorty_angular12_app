@@ -1,0 +1,12 @@
+<div class="container mt-2">
+  <ngb-pagination [collectionSize]="infoApiCharacters.count" [(page)]="page" [maxSize]="5" [boundaryLinks]="true" (click)="getPaginatorPage()">
+  </ngb-pagination>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+  <div class="col" *ngFor="let item of filterCharacters">
+    <app-character-card (lanzaAddComparativa)="addComparativa($event)" [character]="item" [disableButton]="disableButton" [verBotonComparar]="verBotonComparar"></app-character-card>
+  </div>
+
+</div>

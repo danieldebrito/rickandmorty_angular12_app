@@ -1,0 +1,7 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+  <div class="col" *ngFor="let item of filterEpisodes">
+    <app-episode-card [episode]="item" (verDetalle)="verDetalleEpisodio($event)"></app-episode-card>
+  </div>
+
+</div>
